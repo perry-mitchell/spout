@@ -10,30 +10,40 @@ function acceptData(pipeInst, chunks) {
     flush(pipeInst);
 }
 
+function connect(pipeInst, target) {
+    pipeInst[PIPE_OUTPUT] = target;
+    return target;
+}
+
 function flush(pipeInst) {
     if (pipeInst[OPTIONS].flushing || pipeInst[PIPE_OUTPUT] === null) {
         return;
     }
     pipeInst[OPTIONS].flushing = true;
     setTimeout(() => {
-        const payload = pipeInst.splice(0, pipeInst[OPTIONS].burst);
+        const payload = pipeInst[QUEUE].splice(0, pipeInst[OPTIONS].burst);
         if (payload.length > 0) {
-            pipeInst[PIPE_OUTPUT](...payload);
+            pipeInst[PIPE_OUTPUT](payload);
         }
     }, pipeInst[OPTIONS].delay);
 }
 
-function pipe({ burst = 10, delay = 0, transform = NOOP } = {}) {
+function pipe(targetOrOptions, options = {}) {
+    const { burst = 10, delay = 0, transform = NOOP } = typeof targetOrOptions === "object" && targetOrOptions
+        ? targetOrOptions
+        : options;
+    const target = typeof targetOrOptions === "function" ? targetOrOptions : null;
     const pipeInst = data => write(pipeInst, data);
-    const options = {};
-    setPipeProperty(options, "burst", burst);
-    setPipeProperty(options, "delay", delay);
-    setPipeProperty(options, "flushing", false, true);
-    setPipeProperty(pipeInst, OPTIONS, options);
+    const pipeOpts = {};
+    setPipeProperty(pipeOpts, "burst", burst);
+    setPipeProperty(pipeOpts, "delay", delay);
+    setPipeProperty(pipeOpts, "flushing", false, true);
+    setPipeProperty(pipeInst, OPTIONS, pipeOpts);
     setPipeProperty(pipeInst, PIPE_INPUT, chunks => acceptData(pipeInst, chunks));
-    setPipeProperty(pipeInst, PIPE_OUTPUT, null, true);
+    setPipeProperty(pipeInst, PIPE_OUTPUT, target, true);
     setPipeProperty(pipeInst, QUEUE, []);
     setPipeProperty(pipeInst, TRANSFORM, transform, true);
+    setPipeProperty(pipeInst, "connect", target => connect(pipeInst, target));
     return pipeInst;
 }
 
