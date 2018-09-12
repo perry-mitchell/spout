@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/perry-mitchell/interconnect.git"
+    "url": "git+https://github.com/perry-mitchell/spout.git"
   },
   "keywords": [
     "data",
@@ -25,9 +25,9 @@
   "author": "Perry Mitchell <perry@perrymitchell.net>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/perry-mitchell/interconnect/issues"
+    "url": "https://github.com/perry-mitchell/spout/issues"
   },
-  "homepage": "https://github.com/perry-mitchell/interconnect#readme",
+  "homepage": "https://github.com/perry-mitchell/spout#readme",
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
