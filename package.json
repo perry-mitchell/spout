@@ -1,6 +1,6 @@
 {
   "name": "spout",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Data transfer across every medium",
   "main": "source/index.js",
   "scripts": {
