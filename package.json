@@ -1,7 +1,7 @@
 {
-  "name": "interconnect",
+  "name": "spout",
   "version": "0.1.0",
-  "description": "Data transfer using pipes, connectors, filters, splits, joins and drains",
+  "description": "Data transfer across every medium",
   "main": "source/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
