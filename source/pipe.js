@@ -4,6 +4,7 @@ const PIPE_INPUT = "@@pipeIn";
 const PIPE_OUTPUT = "@@pipeOut";
 const QUEUE = "@@queue";
 const TRANSFORM = "@@transform";
+const TYPE = "@@type";
 
 function acceptData(pipeInst, chunks) {
     pipeInst[QUEUE].push(...chunks.map(pipeInst[TRANSFORM]));
@@ -43,6 +44,7 @@ function pipe(targetOrOptions, options = {}) {
     setPipeProperty(pipeInst, PIPE_OUTPUT, target, true);
     setPipeProperty(pipeInst, QUEUE, []);
     setPipeProperty(pipeInst, TRANSFORM, transform, true);
+    setPipeProperty(pipeInst, TYPE, "pipe", true);
     setPipeProperty(pipeInst, "connect", target => connect(pipeInst, target));
     return pipeInst;
 }
