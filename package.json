@@ -4,7 +4,10 @@
   "description": "Data transfer across every medium",
   "main": "source/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "run-s test:all",
+    "test:all": "nyc mocha -r test/index.js 'test/**/*.spec.js'",
+    "test:integration": "mocha -r test/index.js 'test/integration/**/*.spec.js'",
+    "test:unit": "mocha -r test/index.js 'test/unit/**/*.spec.js'"
   },
   "repository": {
     "type": "git",
@@ -24,5 +27,14 @@
   "bugs": {
     "url": "https://github.com/perry-mitchell/interconnect/issues"
   },
-  "homepage": "https://github.com/perry-mitchell/interconnect#readme"
+  "homepage": "https://github.com/perry-mitchell/interconnect#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^5.2.0",
+    "npm-run-all": "^4.1.3",
+    "nyc": "^13.0.1",
+    "sinon": "^6.2.0",
+    "sleep-promise": "^8.0.1"
+  }
 }
