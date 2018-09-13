@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="140" height="140" src="https://github.com/perry-mitchell/spout/raw/master/spout.gif">
+</p>
+
 # Spout
 > Data transfer across every medium
 
